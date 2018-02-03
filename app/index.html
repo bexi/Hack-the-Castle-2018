@@ -66,17 +66,27 @@
 
     $('#send-message').submit(function () {
       message('me', $('#message').val());
+      callBot($('#message').val());
       socket.emit('user message', $('#message').val());
       clear();
       $('#lines').get(0).scrollTop = 10000000;
       return false;
     });
 
+    function callBot (msg) {
+      var response = handleBotCall(msg);
+      if (response != "") {
+        message('Bot', response);
+      }
+    }
+
     function clear () {
       $('#message').val('').focus();
     };
   });
     </script>
+
+    <script src="/bot.js"></script>
 
     <div id="chat">
       <div id="nickname">
