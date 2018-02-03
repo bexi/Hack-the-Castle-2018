@@ -8,15 +8,37 @@
     <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet">
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+    <style>
+     span { font-size: 2em; padding: 0.5% 1%; margin: 1% 1%; font-family: 'Roboto Slab';}
+      form .send { background: #FFFFFF; padding: 3px; position: fixed; bottom: 0; width: 100%; }
+      form input { border: 1; padding: 10px; width: 80%; margin-right: .5%; }
+      form button { width: 9%; background: rgb(130, 224, 255); border: none; padding: 10px; }
+      ul{overflow:auto; height: 50%; position: relative;}
+      #chat_log { list-style-type: none; margin: 0%; padding: 0; }
+      #chat_log li { margin: 1%; padding: 0.5% 1%; font-family: 'Roboto Slab'; }
+      .o_span { background: #FF8A80; }
+      .s_span {background: #F44336; }
+      .log { padding: 2%; font-size: 2em; }
+      .self { text-align: right; color: white;}
+      .other { color: white; text-align: left;}
+      h3 { text-align: right;}
+    </style>
   </head>
 
   <body>
+    <div class='log'>
+        <ul id="chat_log"></ul>
+
+    </div>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
 
     <script>
     // socket.io specific code
-    var socket = io.connect();
+    var socket = io.connect("http://localhost:3000/");
 
     // event from socketio
     socket.on('connect', function () {
@@ -25,17 +47,17 @@
 
     // this event is send when a user joins or leaves the chat
     socket.on('announcement', function (msg) {
-      // renders as a new line with emphasized text
       $('#lines').append($('<p>').append($('<em>').text(msg)));
     });
 
     socket.on('nicknames', function (nicknames) {
-      $('#nicknames').empty().append($('<span>Online: </span>'));
-        for (var i in nicknames) {
-          $('#nicknames').append($('<b>').text(nicknames[i]));
+    $('#nicknames').empty().append($('<span>Online: </span>'));
+      for (var i in nicknames) {
+        $('#nicknames').append($('<b>').text(nicknames[i]));
       }
     });
 
+    socket.on('self message', s_message);
     socket.on('user message', message);
 
     socket.on('reconnect', function () {
@@ -53,7 +75,11 @@
 
     // overall function for adding a new line to the chat
     function message (from, msg) {
-      $('#lines').append($('<p>').append($('<b>').text(from), msg));
+      $('#lines').append("<p><span class='o_span'><b>"+from+": </b>"+msg+"</span></p>");
+    }
+
+    function s_message (from, msg) {
+      $('#lines').append("<p align='right'><span class='s_span'>"+msg+"</span></p>");
     }
 
     // dom manipulation
@@ -67,15 +93,16 @@
           $('#nickname-err').css('visibility', 'visible');
         });
         return false;
-      });
+    });
 
-      $('#send-message').submit(function () {
-        message('me', $('#message').val());
-        socket.emit('user message', $('#message').val());
-        clear();
-        $('#lines').get(0).scrollTop = 10000000;
-        return false;
-      });
+    $('#send-message').submit(function () {
+      s_message('', $('#message').val());
+      socket.emit('user message', $('#message').val());
+      //socket.broadcast.emit('user message',$('#message').val());
+      clear();
+      $('#lines').get(0).scrollTop = 10000000;
+      return false;
+    });
 
       function clear () {
         $('#message').val('').focus();
@@ -104,7 +131,7 @@
       <!-- form for sending a message -->
       <form id="send-message">
         <input id="message">
-        <button>Send Message</button>
+        <button>Send</button>
       </form>
     </div>
 
