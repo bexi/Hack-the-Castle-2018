@@ -4,4 +4,5 @@ function handleBotCall (message) {
   } else if (message == "/hint") {
     return "How is the weather?"
   }
+  return "";
 }
