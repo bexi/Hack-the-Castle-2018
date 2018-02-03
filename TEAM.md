@@ -14,15 +14,13 @@ De fyra linguisterna
 - Björn Hedström
 
 ## Setup instructions
-TODO
-Explain how to set up the project
 ```bash
 $ git clone https://github.com/rutanjr/Hack-the-Castle-2018.git
-$ cd Hack-the-Castle-2018
-$ ...
+$ cd Hack-the-Castle-2018/app
+$ npm install
+$ node index.js
 
-Then visit [](http://localhost:8000/)
-
+Then visit (http://localhost:3000/)
 
 ## Demo
 TODO
