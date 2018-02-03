@@ -6,7 +6,7 @@ var socket = io.connect();
 // event from socketio
 socket.on('connect', function () {
   $('#chat').addClass('connected');
-  message('Bot', "Welcome to the <i><b>English</b></i> chatroom!<br>Write /topic to get a topic suggestion.<br>Write /hintq to get a hint for a question to ask.<br>Write /hinta to get a hint for a reply to the question.");
+  message('Bot', "Welcome to the <i><b>English</b></i> chatroom!<br><br>Write /topic to get a topic suggestion.<br><br>Write /hintq to get a hint for a question to ask.<br><br>Write /hinta to get a hint for a reply to the question.");
 });
 
 // this event is send when a user joins or leaves the chat
