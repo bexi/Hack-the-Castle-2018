@@ -58,6 +58,8 @@ $(function () {
 });
 
 $('#send-message').submit(function () {
+  var spellingHints = checkSpelling($('#message').val());
+  s_message('SpellHints', spellingHints.length);
   s_message('me', $('#message').val());
   callBot($('#message').val());
   socket.emit('user message', $('#message').val());

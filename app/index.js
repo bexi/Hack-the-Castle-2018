@@ -3,6 +3,11 @@ var app = require('express')();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var nicknames = {};
+var fs = require('fs');
+var nodehun = require('nodehun');
+var affbuf = fs.readFileSync('node_modules/dictionary-en-us'+'/index.aff');
+var dictbuf = fs.readFileSync('node_modules/dictionary-en-us'+'/index.dic');
+
 
 app.get('/', function(req, res){
   res.sendFile(__dirname + '/index.html');
