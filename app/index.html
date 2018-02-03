@@ -16,21 +16,18 @@
     <nav class="light-blue lighten-1" role="navigation">
       <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">Logo</a>
         <ul class="right hide-on-med-and-down">
-          <li><a href="#">Navbar Link</a></li>
-          <li><a href="#">Navbar Link 2</a></li>
+          <li><a href="#">Profile</a></li>
+          <li><a href="#">Sign Out</a></li>
 
         </ul>
 
         <ul id="nav-mobile" class="side-nav">
-          <li><a href="#">Navbar Link</a></li>
-          <li><a href="#">Navbar Link 2</a></li>
+          <li><a href="#">Profile</a></li>
+          <li><a href="#">Sign Out</a></li>
         </ul>
         <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
       </div>
     </nav>
-
-
-
 
     <div class='log'>
         <ul id="chat_log"></ul>
@@ -87,9 +84,6 @@
 
     // dom manipulation
     $(function () {
-      setTimeout(function (){
-        $('.button-collapse').sideNav('show');
-      },1000)
 
       $('#set-nickname').submit(function (ev) {
         socket.emit('nickname', $('#nick').val(), function (set) {
@@ -122,6 +116,7 @@
     function clear () {
       $('#message').val('').focus();
     };
+
   });
     </script>
 
