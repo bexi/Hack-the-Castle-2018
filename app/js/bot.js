@@ -15,9 +15,13 @@ var activeTopic = null;
 function handleBotCall (message) {
   if (message == "/topic") {
     activeTopic = getNextTopic();
-    return activeTopic.starter;
-  } else if (message == "/hint") {
+    if (activeTopic != null) {
+      return activeTopic.starter;
+    }
+  } else if (message == "/hintq" && activeTopic != null) {
     return activeTopic.question;
+  } else if (message == "/hinta" && activeTopic != null) {
+    return activeTopic.answers;
   } else {
     return "";
   }
