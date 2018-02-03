@@ -13,8 +13,8 @@
   </head>
 
   <body>
-    <nav class="light-blue lighten-1" role="navigation">
-      <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">Logo</a>
+    <nav class="amber" role="navigation">
+      <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">Linguana</a>
         <ul class="right hide-on-med-and-down">
           <li><a href="#">Profile</a></li>
           <li><a href="#">Sign Out</a></li>
@@ -43,10 +43,6 @@
           <p id="nickname-err">Nickname already in use</p>
         </form>
       </div>
-      <!-- div for knowing if you are connected -->
-      <div id="connecting">
-        <div class="wrap">Connecting to socket.io server</div>
-      </div>
       <!-- a div for showing the messages -->
       <div id="chat_log">
         <div id="nicknames"></div>
@@ -55,7 +51,7 @@
       <!-- form for sending a message -->
     </div>
     <form id="send-message" class="chatter">
-      <input id="message" class="field">
+      <input id="message" class="field" autocomplete="off">
       <button class="sender">Send</button>
     </form>
 
