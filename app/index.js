@@ -6,7 +6,7 @@ var io = require('socket.io')(http);
 var nicknames = {};
 
 app.get('/', function(req, res){
-  res.sendFile(__dirname + '/index.html');
+  res.sendFile(__dirname + '/home.html');
 });
 
 app.use(express.static('files'));
