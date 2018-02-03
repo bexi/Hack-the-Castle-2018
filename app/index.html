@@ -44,7 +44,7 @@
 
     <script>
     // socket.io specific code
-    var socket = io.connect("http://localhost:3000/");
+    var socket = io.connect();
 
     // event from socketio
     socket.on('connect', function () {
@@ -102,7 +102,8 @@
     });
 
     $('#send-message').submit(function () {
-      s_message('', $('#message').val());
+      message('me', $('#message').val());
+      callBot($('#message').val());
       socket.emit('user message', $('#message').val());
       //socket.broadcast.emit('user message',$('#message').val());
       clear();
@@ -110,11 +111,20 @@
       return false;
     });
 
-      function clear () {
-        $('#message').val('').focus();
-      };
-    });
+    function callBot (msg) {
+      var response = handleBotCall(msg);
+      if (response != "") {
+        message('Bot', response);
+      }
+    }
+
+    function clear () {
+      $('#message').val('').focus();
+    };
+  });
     </script>
+
+    <script src="/bot.js"></script>
 
     <div id="chat">
       <!-- a div for setting your nickname -->
