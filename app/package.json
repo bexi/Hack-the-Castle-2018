@@ -1,7 +1,7 @@
 {
-  "name": "langage-app",
+  "name": "socket-chat-example",
   "version": "0.0.1",
-  "description": "app for learning language by guided conversation",
+  "description": "my first socket.io app",
   "dependencies": {
     "express": "^4.15.2",
     "socket.io": "^2.0.4"
