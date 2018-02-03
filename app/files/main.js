@@ -14,6 +14,8 @@ socket.on('announcement', function (msg) {
 });
 
 socket.on('nicknames', function (nicknames) {
+$('#nickname').empty();
+$('#connected').html("Welcome to the <i><b>English</b></i> chatroom!");
 $('#nicknames').empty().append($('<span>Online: </span>'));
   for (var i in nicknames) {
     $('#nicknames').append($('<b>').text(nicknames[i]));
