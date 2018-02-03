@@ -7,32 +7,57 @@
     <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet">
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
-
+    <style>
+      span { font-size: 2em; padding: 0.5% 1%; margin: 1% 1%; font-family: 'Roboto Slab';}
+      form { background: #FFFFFF; padding: 3px; position: fixed; bottom: 0; width: 100%; }
+      form input { border: 1; padding: 10px; width: 80%; margin-right: .5%; }
+      form button { width: 9%; background: rgb(130, 224, 255); border: none; padding: 10px; }
+      ul{overflow:auto; height: 50%; position: relative;}
+      #chat_log { list-style-type: none; margin: 0%; padding: 0; }
+      #chat_log li { margin: 1%; padding: 0.5% 1%; font-family: 'Roboto Slab'; }
+      .o_span { background: #FF8A80; }
+      .s_span {background: #F44336; }
+      .log { padding: 2%; font-size: 2em; }
+      .self { text-align: right; color: white;}
+      .other { color: white; text-align: left;}
+      h3 { text-align: right;}
+    </style>
   </head>
 
   <body>
+    <div class='log'>
+        <ul id="chat_log"></ul>
+      <form action="">
+        <input id="m" autocomplete="off" />
+        <button>Go</button>
+      </form>
+    </div>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
     <script>
 
     // socket.io specific code
     var socket = io.connect('http://localhost:3000');
 
     socket.on('connect', function () {
-    $('#chat').addClass('connected');
+      $('#chat').addClass('connected');
     });
 
     socket.on('announcement', function (msg) {
-    $('#lines').append($('<p>').append($('<em>').text(msg)));
+      $('#lines').append($('<p>').append($('<em>').text(msg)));
     });
 
     socket.on('nicknames', function (nicknames) {
     $('#nicknames').empty().append($('<span>Online: </span>'));
-    for (var i in nicknames) {
-      $('#nicknames').append($('<b>').text(nicknames[i]));
-    }
+      for (var i in nicknames) {
+        $('#nicknames').append($('<b>').text(nicknames[i]));
+      }
     });
 
+    socket.on('self message', s_message);
     socket.on('user message', message);
     socket.on('reconnect', function () {
       $('#lines').remove();
@@ -40,33 +65,38 @@
     });
 
     socket.on('reconnecting', function () {
-    message('System', 'Attempting to re-connect to the server');
+      message('System', 'Attempting to re-connect to the server');
     });
 
     socket.on('error', function (e) {
-    message('System', e ? e : 'A unknown error occurred');
+      message('System', e ? e : 'A unknown error occurred');
     });
 
     function message (from, msg) {
-    $('#lines').append($('<p>').append($('<b>').text(from), msg));
+      $('#lines').append("<p><span class='o_span'><b>"+from+": </b>"+msg+"</span></p>");
+    }
+
+    function s_message (from, msg) {
+      $('#lines').append("<p align='right'><span class='s_span'>"+msg+"</span></p>");
     }
 
     // dom manipulation
     $(function () {
-    $('#set-nickname').submit(function (ev) {
-      socket.emit('nickname', $('#nick').val(), function (set) {
-        if (!set) {
-          clear();
-          return $('#chat').addClass('nickname-set');
-        }
-        $('#nickname-err').css('visibility', 'visible');
-      });
-      return false;
+      $('#set-nickname').submit(function (ev) {
+        socket.emit('nickname', $('#nick').val(), function (set) {
+          if (!set) {
+            clear();
+            return $('#chat').addClass('nickname-set');
+          }
+          $('#nickname-err').css('visibility', 'visible');
+        });
+        return false;
     });
 
     $('#send-message').submit(function () {
-      message('me', $('#message').val());
+      s_message('', $('#message').val());
       socket.emit('user message', $('#message').val());
+      //socket.broadcast.emit('user message',$('#message').val());
       clear();
       $('#lines').get(0).scrollTop = 10000000;
       return false;
@@ -95,7 +125,7 @@
       </div>
       <form id="send-message">
         <input id="message">
-        <button>Send Message</button>
+        <button>Send</button>
       </form>
     </div>
 
