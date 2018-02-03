@@ -1,4 +1,4 @@
-//this is the js-file which handles the webpage 
+//this is the js-file which handles the webpage
 
 // socket.io specific code
 var socket = io.connect();
@@ -13,6 +13,7 @@ socket.on('announcement', function (msg) {
   $('#lines').append($('<p>').append($('<em>').text(msg)));
 });
 
+// write all online users in chatroom
 socket.on('nicknames', function (nicknames) {
 $('#nickname').empty();
 $('#connected').html("Welcome to the <i><b>English</b></i> chatroom!");
@@ -42,7 +43,7 @@ socket.on('error', function (e) {
 function message (from, msg) {
   $('#lines').append("<p><span class='o_span'><b>"+from+": </b>"+msg+"</span></p>");
 }
-
+// function for your own messages, they alight to the right
 function s_message (from, msg) {
   $('#lines').append("<p align='right'><span class='s_span'>"+msg+"</span></p>");
 }
@@ -59,24 +60,24 @@ $(function () {
       $('#nickname-err').css('visibility', 'visible');
     });
     return false;
-});
+  });
 
-$('#send-message').submit(function () {
-  s_message('me', $('#message').val());
-  callBot($('#message').val());
-  socket.emit('user message', $('#message').val());
-  //socket.broadcast.emit('user message',$('#message').val());
-  clear();
-  $('#lines').get(0).scrollTop = 10000000;
-  return false;
-});
+  $('#send-message').submit(function () {
+    s_message('me', $('#message').val());
+    callBot($('#message').val());
+    socket.emit('user message', $('#message').val());
+    //socket.broadcast.emit('user message',$('#message').val());
+    clear();
+    $('#lines').get(0).scrollTop = 10000000;
+    return false;
+  });
 
-function callBot (msg) {
-  var response = handleBotCall(msg);
-  if (response != "") {
-    message('Bot', response);
+  function callBot (msg) {
+    var response = handleBotCall(msg);
+    if (response != "") {
+      message('Bot', response);
+    }
   }
-}
 
   function clear () {
     $('#message').val('').focus();
@@ -84,6 +85,7 @@ function callBot (msg) {
   // for mobile side-nav-menu
   $('.button-collapse').sideNav();
 
+  // onclick events
   $('#english').click(function(e) {
     window.location.href = "chat.html";
   });
