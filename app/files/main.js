@@ -16,7 +16,7 @@ socket.on('announcement', function (msg) {
 
 // write all online users in chatroom
 socket.on('nicknames', function (nicknames) {
-$('#nickname').empty();
+//$('#nickname').empty();
 $('#connected').html("Welcome to the <i><b>English</b></i> chatroom!");
 $('#nicknames').empty().append($('<span>Online: </span>'));
   for (var i in nicknames) {
