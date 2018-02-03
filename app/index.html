@@ -1,12 +1,21 @@
 <!doctype html>
 <html>
   <head>
-    <title>Language-app 0.0.1</title>
+        <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+    <style>
+      form { background: #FFFFFF; padding: 3px; position: fixed; bottom: 0; width: 100%; }
+      form input { border: 0; padding: 10px; width: 90%; margin-right: .5%; }
+      form button { width: 9%; background: rgb(130, 224, 255); border: none; padding: 10px; }
+    </style>
   </head>
   <body>
     <ul id="chat_log"></ul>
     <form action="">
-      <input id="m" autocomplete="on" /><button>Go</button>
+      <input id="m" autocomplete="on" />
+      <button>Go</button>
     </form>
     <script src="/socket.io/socket.io.js"></script>
     <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
