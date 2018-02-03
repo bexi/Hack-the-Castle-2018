@@ -6,6 +6,7 @@ var socket = io.connect();
 // event from socketio
 socket.on('connect', function () {
   $('#chat').addClass('connected');
+  message('Bot', "Welcome to the <i><b>English</b></i> chatroom!<br>Write /topic to get a topic suggestion.<br>Write /helpq to get a hint for a question to ask.<br>Write /helpa to get a hint for a reply to the question.");
 });
 
 // this event is send when a user joins or leaves the chat
@@ -16,7 +17,7 @@ socket.on('announcement', function (msg) {
 // write all online users in chatroom
 socket.on('nicknames', function (nicknames) {
 $('#nickname').empty();
-$('#connected').html("Welcome to the <i><b>English</b></i> chatroom!<br>Write /topic to get a topic suggestion.<br>Write /helpq to get a hint for a question to ask.<br>Write /helpa to get a hint for a reply to the question.");
+$('#connected').html("Welcome to the <i><b>English</b></i> chatroom!");
 $('#nicknames').empty().append($('<span>Online: </span>'));
   for (var i in nicknames) {
     $('#nicknames').append($('<b>').text(nicknames[i]));
