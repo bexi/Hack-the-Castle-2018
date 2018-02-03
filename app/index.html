@@ -102,7 +102,7 @@
     });
 
     $('#send-message').submit(function () {
-      message('me', $('#message').val());
+      s_message('me', $('#message').val());
       callBot($('#message').val());
       socket.emit('user message', $('#message').val());
       //socket.broadcast.emit('user message',$('#message').val());
