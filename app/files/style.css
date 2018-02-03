@@ -39,7 +39,6 @@ ul #chat_log{
 
 #chat {
   background-color: white;
-  margin-top: 15%;
   overflow:auto;
   margin-bottom: 20%;
   margin-right: 2%;
@@ -49,6 +48,7 @@ ul #chat_log{
 }
 
 #chat_log {
+  margin-top: 10%;
   list-style-type: none;
   margin: 0%;
   height: 80%;
@@ -59,6 +59,9 @@ ul #chat_log{
   margin: 1%;
   padding: 0.5% 1%;
   font-family: 'Roboto Slab';
+}
+#nickname {
+  margin-top: 10%;
 }
 
 #lines {
