@@ -1,0 +1,19 @@
+span { font-size: 4em; padding: 0.5% 1%; margin: 1% 1%; font-family: 'Roboto Slab';
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+form .send { background: #FFFFFF; padding: 3px; position: fixed; bottom: 0; width: 100%; font-size: 5em; }
+form input { border: 1; padding: 10px; width: 80%; margin-right: .5%; }
+form button { width: 9%; background: rgb(130, 224, 255); border: none; padding: 10px; }
+ul #chat_log{overflow:auto; height: 50%; position: relative;}
+.chat { background-color: #E1F5FE; margin: 2%; padding: 3%; }
+#chat_log { list-style-type: none; margin: 0%; padding: 0; }
+#chat_log li { margin: 1%; padding: 0.5% 1%; font-family: 'Roboto Slab'; }
+.o_span { background: #E1F5FE; }
+.s_span {background: #F44336; color: white;}
+.log { padding: 2%; font-size: 2em; }
+.self { text-align: right; color: white;}
+.other { color: white; text-align: left;}
+h3 { text-align: right;}
+.chatter { position:fixed; bottom:0; width: 100%; font-size: 2em; background-color: #E8EAF6;}
+input { font-size: 4em; height: 17%; }
+.sender {margin-left: 75%; margin-bottom: 2%; height: 17%; width: 20%; }
