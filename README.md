@@ -11,7 +11,7 @@ In this way, you can learn the new language fast and maybe even find new friends
 De fyra linguisterna
 - Rebecka Reitmaier
 - Gustav Bergström
-- Oscar Rutqvist
+- Oskar Rutqvist
 - Björn Hedström
 
 ## Setup instructions
@@ -20,10 +20,17 @@ $ git clone https://github.com/rutanjr/Hack-the-Castle-2018.git
 $ cd Hack-the-Castle-2018/app
 $ npm install
 $ node index.js
-
-Then visit (http://localhost:3000/)
 ```
 
+Then visit (http://localhost:3000/)
+
+
 ## Demo
-TODO
-If applicable put a link to a live demo here, maybe with some short instructions.
+Run the following on the server computer to get an accessible URL to the server.
+
+```bash
+npm install -g localtunnel
+lt --port 3000
+```
+
+Then enter the provided URL to connect to the chat on other devices.
