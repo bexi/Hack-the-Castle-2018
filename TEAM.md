@@ -1,10 +1,11 @@
 # De fyra linguisterna
-Chat for learning a new language.
+A chat for learning a new language together with other people.
 
 ## Background
-A web-app for finding new friends to learn a new language.
-A bot in the chat will help out the learners through topics
-and tips if they want it.
+There are several existing chat bots for learning new languages.
+However, we believe that you learn better when talking to another human.
+This web-app allows people to chat with each other with and get some hints from a bot when needed.
+In this way, you can learn the new language fast and maybe even find new friends while doing so.
 
 ## Team
 De fyra linguisterna
@@ -21,6 +22,7 @@ $ npm install
 $ node index.js
 
 Then visit (http://localhost:3000/)
+```
 
 ## Demo
 TODO
