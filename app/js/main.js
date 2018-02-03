@@ -80,4 +80,8 @@ function clear () {
 // for mobile side-nav-menu
 $('.button-collapse').sideNav();
 
+$('#english').click(function(e) {
+  window.location.href = "chat.html";
+});
+
 });

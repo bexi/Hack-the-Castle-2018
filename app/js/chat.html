@@ -1,0 +1,71 @@
+<!doctype html>
+<html>
+  <head>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <!--App specific css -->
+    <link rel="stylesheet" href="/style.css">
+
+  </head>
+
+  <body>
+    <nav class="light-blue lighten-1" role="navigation">
+      <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">Logo</a>
+        <ul class="right hide-on-med-and-down">
+          <li><a href="#">Profile</a></li>
+          <li><a href="#">Sign Out</a></li>
+
+        </ul>
+
+        <ul id="nav-mobile" class="side-nav">
+          <li><a href="#">Profile</a></li>
+          <li><a href="#">Sign Out</a></li>
+        </ul>
+        <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+      </div>
+    </nav>
+
+    <div class='log'>
+        <ul id="chat_log"></ul>
+
+    </div>
+
+    <div id="chat">
+      <!-- a div for setting your nickname -->
+      <div id="nickname">
+        <form class="send" id="set-nickname" class="wrap">
+          <p>Please type in your nickname and press enter.</p>
+          <input id="nick">
+          <p id="nickname-err">Nickname already in use</p>
+        </form>
+      </div>
+      <!-- div for knowing if you are connected -->
+      <div id="connecting">
+        <div class="wrap">Connecting to socket.io server</div>
+      </div>
+      <!-- a div for showing the messages -->
+      <div id="chat_log">
+        <div id="nicknames"></div>
+        <div id="lines"></div>
+      </div>
+      <!-- form for sending a message -->
+    </div>
+    <form id="send-message" class="chatter">
+      <input id="message" class="field">
+      <button class="sender">Send</button>
+    </form>
+
+    <!--JS scripts-->
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+    <script src="/main.js"></script>
+    <script src="/bot.js"></script>
+    <!--Import jQuery before materialize.js-->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+  </body>
+</html>

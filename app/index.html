@@ -29,35 +29,76 @@
       </div>
     </nav>
 
-    <div class='log'>
-        <ul id="chat_log"></ul>
+    <div class="section no-pad-bot" id="index-banner">
+      <div class="container">
+        <br><br>
+        <h1 class="header center orange-text">Welcome</h1>
+        <div class="row center">
+          <h5 class="header col s12 light">A chat for people who want to learn new languages</h5>
+        </div>
+        <br><br>
 
+      </div>
     </div>
 
-    <div id="chat">
-      <!-- a div for setting your nickname -->
-      <div id="nickname">
-        <form class="send" id="set-nickname" class="wrap">
-          <p>Please type in your nickname and press enter.</p>
-          <input id="nick">
-          <p id="nickname-err">Nickname already in use</p>
-        </form>
+    <div class="container">
+      <div class="section">
+
+        <!--   Icon Section   -->
+        <div class="row">
+          <div class="col s12 m4" id="english">
+            <div class="icon-block">
+              <h2 class="center light-blue-text"><i class="material-icons">flag</i></h2>
+              <h5 class="center">English</h5>
+            </div>
+          </div>
+
+          <div class="col s12 m4">
+            <div class="icon-block">
+              <h2 class="center light-blue-text"><i class="material-icons">flag</i></h2>
+              <h5 class="center">Spanish</h5>
+            </div>
+          </div>
+
+          <div class="col s12 m4">
+            <div class="icon-block">
+              <h2 class="center light-blue-text"><i class="material-icons">flag</i></h2>
+              <h5 class="center">French</h5>
+              <p class="light"></p>
+            </div>
+          </div>
+        </div>
+
       </div>
-      <!-- div for knowing if you are connected -->
-      <div id="connecting">
-        <div class="wrap">Connecting to socket.io server</div>
-      </div>
-      <!-- a div for showing the messages -->
-      <div id="chat_log">
-        <div id="nicknames"></div>
-        <div id="lines"></div>
-      </div>
-      <!-- form for sending a message -->
+      <br><br>
     </div>
-    <form id="send-message" class="chatter">
-      <input id="message" class="field">
-      <button class="sender">Send</button>
-    </form>
+
+    <footer class="page-footer orange">
+      <div class="container">
+        <div class="row">
+          <div class="col l9 s12">
+            <h5 class="white-text">Company Bio</h5>
+            <p class="grey-text text-lighten-4">We want to make the world talk to each other in an fun and easy way, there for we created Linguana. We are a team of college students working on this project for fun. Any amount would help support and continue development on this project and is greatly appreciated.</p>
+
+
+          </div>
+          <div class="col l3 s12">
+            <h5 class="white-text">Contact us!</h5>
+            <ul>
+              <li><a class="white-text" href="#!">trreitmaier@gmail.com</a></li>
+              <li><a class="white-text" href="#!">gustav_m_o_bergstrom@hotmail.com</a></li>
+              <li><a class="white-text" href="#!">rutanjr@gmail.com</a></li>
+              <li><a class="white-text" href="#!">bjorn.e.hedstrom@gmail.com</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="footer-copyright">
+        <div class="container">
+        Made by <a class="orange-text text-lighten-3">De Fyra Linguisterna</a>
+        </div>
+      </div>
+    </footer>
 
     <!--JS scripts-->
     <script src="/socket.io/socket.io.js"></script>
