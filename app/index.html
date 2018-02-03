@@ -1,36 +1,103 @@
 <!doctype html>
 <html>
   <head>
-        <!-- Compiled and minified CSS -->
+    <!-- socketIO - core for chat -->
+    <script src="/socket.io/socket.io.js"></script>
+    <!--jquery (is needed for materialize) -->
+    <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+    <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
-    <style>
-      form { background: #FFFFFF; padding: 3px; position: fixed; bottom: 0; width: 100%; }
-      form input { border: 0; padding: 10px; width: 90%; margin-right: .5%; }
-      form button { width: 9%; background: rgb(130, 224, 255); border: none; padding: 10px; }
-    </style>
+
   </head>
+
   <body>
-    <ul id="chat_log"></ul>
-    <form action="">
-      <input id="m" autocomplete="on" />
-      <button>Go</button>
-    </form>
-    <script src="/socket.io/socket.io.js"></script>
-    <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
     <script>
-      $(function () {
-        var socket = io();
-        $('form').submit(function(){
-          socket.emit('chat message', $('#m').val());
-          $('#m').val('');
-          return false;
-        });
-        socket.on('chat message', function(msg){
-          $('#chat_log').append($('<li>').text(msg));
-        });
+
+    // socket.io specific code
+    var socket = io.connect('http://localhost:3000');
+
+    socket.on('connect', function () {
+    $('#chat').addClass('connected');
+    });
+
+    socket.on('announcement', function (msg) {
+    $('#lines').append($('<p>').append($('<em>').text(msg)));
+    });
+
+    socket.on('nicknames', function (nicknames) {
+    $('#nicknames').empty().append($('<span>Online: </span>'));
+    for (var i in nicknames) {
+      $('#nicknames').append($('<b>').text(nicknames[i]));
+    }
+    });
+
+    socket.on('user message', message);
+    socket.on('reconnect', function () {
+      $('#lines').remove();
+      message('System', 'Reconnected to the server');
+    });
+
+    socket.on('reconnecting', function () {
+    message('System', 'Attempting to re-connect to the server');
+    });
+
+    socket.on('error', function (e) {
+    message('System', e ? e : 'A unknown error occurred');
+    });
+
+    function message (from, msg) {
+    $('#lines').append($('<p>').append($('<b>').text(from), msg));
+    }
+
+    // dom manipulation
+    $(function () {
+    $('#set-nickname').submit(function (ev) {
+      socket.emit('nickname', $('#nick').val(), function (set) {
+        if (!set) {
+          clear();
+          return $('#chat').addClass('nickname-set');
+        }
+        $('#nickname-err').css('visibility', 'visible');
       });
+      return false;
+    });
+
+    $('#send-message').submit(function () {
+      message('me', $('#message').val());
+      socket.emit('user message', $('#message').val());
+      clear();
+      $('#lines').get(0).scrollTop = 10000000;
+      return false;
+    });
+
+    function clear () {
+      $('#message').val('').focus();
+    };
+  });
     </script>
+
+    <div id="chat">
+      <div id="nickname">
+        <form id="set-nickname" class="wrap">
+          <p>Please type in your nickname and press enter.</p>
+          <input id="nick">
+          <p id="nickname-err">Nickname already in use</p>
+        </form>
+      </div>
+      <div id="connecting">
+        <div class="wrap">Connecting to socket.io server</div>
+      </div>
+      <div id="chat_log">
+        <div id="nicknames"></div>
+        <div id="lines"></div>
+      </div>
+      <form id="send-message">
+        <input id="message">
+        <button>Send Message</button>
+      </form>
+    </div>
+
   </body>
 </html>
