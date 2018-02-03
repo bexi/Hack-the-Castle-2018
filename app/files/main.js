@@ -1,3 +1,5 @@
+//this is the file which handles the webpage 
+
 // socket.io specific code
 var socket = io.connect();
 
@@ -74,14 +76,23 @@ function callBot (msg) {
   }
 }
 
-function clear () {
-  $('#message').val('').focus();
-};
-// for mobile side-nav-menu
-$('.button-collapse').sideNav();
+  function clear () {
+    $('#message').val('').focus();
+  };
+  // for mobile side-nav-menu
+  $('.button-collapse').sideNav();
 
-$('#english').click(function(e) {
-  window.location.href = "chat.html";
-});
+  $('#english').click(function(e) {
+    window.location.href = "chat.html";
+  });
+  $('#spanish').click(function(e) {
+    window.location.href = "chat.html";
+  });
+  $('#french').click(function(e) {
+    window.location.href = "chat.html";
+  });
+  $('#logo-container').click(function(e) {
+    window.location.href = "/";
+  });
 
 });

@@ -1,3 +1,4 @@
+//this is the node-server which handles requests and the socketio
 var express =require('express');
 var app = require('express')();
 var http = require('http').Server(app);
@@ -15,10 +16,6 @@ http.listen(3000, function(){
 });
 
 io.on('connection', function(socket){
-  /*socket.on('chat message', function(msg){
-    io.emit('chat message', msg);
-  });*/
-
   socket.on('user message', function (msg) {
    socket.broadcast.emit('user message', socket.nickname, msg);
  });
