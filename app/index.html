@@ -1,21 +1,27 @@
 <!doctype html>
 <html>
   <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
     <!-- socketIO - core for chat -->
     <script src="/socket.io/socket.io.js"></script>
     <!--jquery (is needed for materialize etc) -->
     <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+
     <link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet">
     <!-- Compiled and minified JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
     <style>
      span { font-size: 2em; padding: 0.5% 1%; margin: 1% 1%; font-family: 'Roboto Slab';}
       form .send { background: #FFFFFF; padding: 3px; position: fixed; bottom: 0; width: 100%; }
       form input { border: 1; padding: 10px; width: 80%; margin-right: .5%; }
       form button { width: 9%; background: rgb(130, 224, 255); border: none; padding: 10px; }
-      ul{overflow:auto; height: 50%; position: relative;}
+      ul #chat_log{overflow:auto; height: 50%; position: relative;}
       #chat_log { list-style-type: none; margin: 0%; padding: 0; }
       #chat_log li { margin: 1%; padding: 0.5% 1%; font-family: 'Roboto Slab'; }
       .o_span { background: #FF8A80; }
@@ -28,6 +34,38 @@
   </head>
 
   <body>
+    <nav class="light-blue lighten-1" role="navigation">
+      <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">Logo</a>
+        <ul class="right hide-on-med-and-down">
+          <li><a href="#">Navbar Link</a></li>
+          <li><a href="#">Navbar Link 2</a></li>
+
+        </ul>
+
+        <ul id="nav-mobile" class="side-nav">
+          <li><a href="#">Navbar Link</a></li>
+          <li><a href="#">Navbar Link 2</a></li>
+        </ul>
+        <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+      </div>
+    </nav>
+
+    <div class="section no-pad-bot" id="index-banner">
+      <div class="container">
+        <br><br>
+        <h1 class="header center orange-text">Starter Template</h1>
+        <div class="row center">
+          <h5 class="header col s12 light">A modern responsive front-end framework based on Material Design</h5>
+        </div>
+        <div class="row center">
+          <a href="" id="download-button" class="btn-large waves-effect waves-light orange">Get Started</a>
+        </div>
+        <br><br>
+
+      </div>
+    </div>
+
+
     <div class='log'>
         <ul id="chat_log"></ul>
 
@@ -83,6 +121,10 @@
 
     // dom manipulation
     $(function () {
+      setTimeout(function (){
+        $('.button-collapse').sideNav('show');
+      },1000)
+
       $('#set-nickname').submit(function (ev) {
         socket.emit('nickname', $('#nick').val(), function (set) {
           if (!set) {
@@ -106,7 +148,9 @@
       function clear () {
         $('#message').val('').focus();
       };
+
     });
+
     </script>
 
     <div id="chat">
@@ -133,6 +177,5 @@
         <button>Send</button>
       </form>
     </div>
-
   </body>
 </html>
