@@ -1,4 +1,4 @@
-//this is the file which handles the webpage 
+//this is the js-file which handles the webpage 
 
 // socket.io specific code
 var socket = io.connect();
